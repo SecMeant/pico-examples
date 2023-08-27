@@ -32,3 +32,20 @@ target_link_libraries(picow_tcpip_server_poll
         pico_stdlib
         )
 pico_add_extra_outputs(picow_tcpip_server_poll)
+
+add_executable(furnace
+        furnace.c
+        )
+target_compile_definitions(furnace PRIVATE
+        WIFI_SSID=\"${WIFI_SSID}\"
+        WIFI_PASSWORD=\"${WIFI_PASSWORD}\"
+        )
+target_include_directories(furnace PRIVATE
+        ${CMAKE_CURRENT_LIST_DIR}
+        ${CMAKE_CURRENT_LIST_DIR}/.. # for our common lwipopts
+        )
+target_link_libraries(furnace
+        pico_cyw43_arch_lwip_poll
+        pico_stdlib
+        )
+pico_add_extra_outputs(furnace)
